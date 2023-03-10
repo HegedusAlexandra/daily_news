@@ -1,0 +1,40 @@
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-family: "Droid Serif", serif;
+  font-size: 14px;
+  color: #2f2f2f;
+  background-color: #f9f7f1;
+}
+
+body header {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 80px;
+  text-transform: uppercase;
+  display: inline-block;
+  line-height: 72px;
+  margin-bottom: 20px;
+}
+
+body .subhead {
+  width: 100%;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Droid Serif", serif;
+  border-bottom: 2px solid #2f2f2f;
+  border-top: 2px solid #2f2f2f;
+  padding: 12px 0 12px 0;
+}
+/*# sourceMappingURL=index.css.map */
