@@ -37,4 +37,43 @@ body .subhead {
   border-top: 2px solid #2f2f2f;
   padding: 12px 0 12px 0;
 }
+
+body .content {
+  display: -ms-grid;
+  display: grid;
+  width: 98vw;
+  height: 400vh;
+  -ms-grid-columns: [first] 20% [line2] 20% [line3] auto [line4] 20% [line5] 20% [end];
+      grid-template-columns: [first] 20% [line2] 20% [line3] auto [line4] 20% [line5] 20% [end];
+  -ms-grid-rows: [row1] 80vh [row2] 90vh [row3] 90vh [row4] auto [last-line];
+      grid-template-rows: [row1] 80vh [row2] 90vh [row3] 90vh [row4] auto [last-line];
+      grid-template-areas: "forecast headline headline headline headline ";
+}
+
+body .content .forecast {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: forecast;
+  width: 16vw;
+  height: 70vh;
+  position: relative;
+  border: 3px double #2f2f2f;
+  padding: 10px 15px 10px 15px;
+  margin-top: 2vh;
+  margin-left: 2vh;
+  line-height: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body .content .news .headline {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+  grid-area: headline;
+}
+
+body .content .news .ncolumn {
+  grid-area: nc;
+}
 /*# sourceMappingURL=index.css.map */

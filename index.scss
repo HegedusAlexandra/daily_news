@@ -28,4 +28,41 @@ body {
     border-top: 2px solid #2f2f2f;
     padding: 12px 0 12px 0;
   }
+
+  .content {
+    display: grid;
+    width: 98vw;
+    height: 400vh;
+    grid-template-columns: [first] 20% [line2] 20% [line3] auto [line4] 20% [line5] 20% [end];
+    grid-template-rows: [row1] 80vh [row2] 90vh [row3] 90vh [row4] auto [last-line];
+    grid-template-areas: "forecast headline headline headline headline ";
+    .forecast {
+      grid-area: forecast;
+      width: 16vw;
+      height: 70vh;
+      position: relative;
+      border: 3px double #2f2f2f;
+      padding: 10px 15px 10px 15px;
+      margin-top: 2vh;
+      margin-left: 2vh;
+      line-height: 20px;
+      box-sizing: border-box;
+    }
+    .news {
+      .headline {
+        grid-area: headline;
+      }
+      .ncolumn {
+        grid-area: nc;
+      }
+    }
+    .market {
+      .mcolumn {
+      }
+    }
+    .sport {
+      .scolumn {
+      }
+    }
+  }
 }

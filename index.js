@@ -1,15 +1,50 @@
 "use strict";
 
-//prompt("Please enter your location", "NEW YORK")
-const city = "Nowhere";
 const date = new Date();
-
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+let dayName = days[date.getDay()];
 let day = date.getDate();
-let month = date.getMonth();
+let month = months[date.getMonth()];
 let year = date.getFullYear();
 
 // This arrangement can be altered based on how we want the date's format to appear.
-let currentDate = `${day} ${month} ${year}`;
+let currentDate = `${dayName}, ${month} ${day} ${year}`;
+
+//prompt("Please enter your location", "NEW YORK")
+// geolocation app js
+/* const successCallback = (position) => {
+  console.log(position);
+};
+
+const errorCallback = (error) => {
+  console.log(error);
+};
+
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+ */
+const city = "London";
 
 if (city != null) {
   document.querySelector("header").textContent = `black sun times`;
@@ -34,6 +69,7 @@ fetch(
   .then((response) => response.json())
   .then((response) => {
     const news = response;
+    console.log(news);
     console.log(news.value[0].description);
     document.querySelector(".column").textContent = news.value[0].description;
   })
