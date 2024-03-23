@@ -50,6 +50,7 @@ body {
       display: flex;
       flex-direction: row;
       width: 100%;
+      height: max-content;
       justify-content: space-between;
 
       .weather_forecast_container {
@@ -133,7 +134,7 @@ body {
               font-size: 53px;
               font-weight: 400;
               margin: 0vh;
-              margin-top: 2vh;
+
               margin-bottom: 2vh;
             }
           }
@@ -144,11 +145,12 @@ body {
           height: 30vh;
           background-size: cover;
           box-sizing: border-box;
-          border: 4px solid #2f2f2f;
+          border: 1px solid #2f2f2f;
         }
       }
+
       .headline {
-        width: 76vw;
+        width: 78vw;
         height: 66vh;
 
         #headline_title {
@@ -156,42 +158,48 @@ body {
           font-style: italic;
           font-size: xx-large;
         }
+
         .headline_sub {
           font-weight: 700;
           font-size: large;
           box-sizing: border-box;
           padding: 10px 0 10px 0;
         }
+
         .headline_sub:before {
           border-top: 1px solid #2f2f2f;
           content: "";
-          width: 76vw;
+          width: 78vw;
           height: 7px;
           display: block;
         }
+
         .headline_sub:after {
           border-bottom: 1px solid #2f2f2f;
           content: "";
-          width: 76vw;
+          width: 78vw;
           height: 10px;
           display: block;
         }
+
         #headline_content {
-          display: block;
-          height: 50vh;
+          display: flex;
+          flex-direction: row;
           font-family: "Open Sans", sans-serif;
           line-height: 4vh;
-          #headline_img {
-            height: 30vh;
-            float: right;
-            margin-left: 2vw;
-          }
+          width: 78vw;
+        }
+        #headline_img {
+          width: 12vw;
+          float: right;
+          margin-left: 2vw;
+          border: 1px solid #2f2f2f;
         }
       }
       .headline:after {
         border-bottom: 1px solid #2f2f2f;
         content: "";
-        width: 76vw;
+        width: 64vw;
         height: 0vh;
         display: block;
       }

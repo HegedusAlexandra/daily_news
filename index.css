@@ -47,6 +47,8 @@ body .content .news {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: -moz-max-content;
+  height: max-content;
   justify-content: space-between;
 }
 body .content .news .weather_forecast_container {
@@ -124,7 +126,6 @@ body .content .news .weather_forecast_container #container .city-card h6 {
   font-size: 53px;
   font-weight: 400;
   margin: 0vh;
-  margin-top: 2vh;
   margin-bottom: 2vh;
 }
 body .content .news .weather_forecast_container #city_img {
@@ -132,10 +133,10 @@ body .content .news .weather_forecast_container #city_img {
   height: 30vh;
   background-size: cover;
   box-sizing: border-box;
-  border: 4px solid #2f2f2f;
+  border: 1px solid #2f2f2f;
 }
 body .content .news .headline {
-  width: 76vw;
+  width: 78vw;
   height: 66vh;
 }
 body .content .news .headline #headline_title {
@@ -152,32 +153,34 @@ body .content .news .headline .headline_sub {
 body .content .news .headline .headline_sub:before {
   border-top: 1px solid #2f2f2f;
   content: "";
-  width: 76vw;
+  width: 78vw;
   height: 7px;
   display: block;
 }
 body .content .news .headline .headline_sub:after {
   border-bottom: 1px solid #2f2f2f;
   content: "";
-  width: 76vw;
+  width: 78vw;
   height: 10px;
   display: block;
 }
 body .content .news .headline #headline_content {
-  display: block;
-  height: 50vh;
+  display: flex;
+  flex-direction: row;
   font-family: "Open Sans", sans-serif;
   line-height: 4vh;
+  width: 78vw;
 }
-body .content .news .headline #headline_content #headline_img {
-  height: 30vh;
+body .content .news .headline #headline_img {
+  width: 12vw;
   float: right;
   margin-left: 2vw;
+  border: 1px solid #2f2f2f;
 }
 body .content .news .headline:after {
   border-bottom: 1px solid #2f2f2f;
   content: "";
-  width: 76vw;
+  width: 64vw;
   height: 0vh;
   display: block;
 }/*# sourceMappingURL=index.css.map */
