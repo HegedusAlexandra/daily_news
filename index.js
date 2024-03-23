@@ -18,7 +18,15 @@ let currentDate = `${dayName}, ${month} ${day} ${year}`;
 
 // location by geolocation and nav language
 
-let city = "London";
+const fillSubHeader = (name) => {
+  document.querySelector(".subhead").textContent = name + " - " + currentDate;
+  localStorage.setItem('chosenCity', name);
+} 
+
+const determineLocation = () => {
+  const browserLanguage = navigator.language;
+  fillSubHeader(languageToCapitalCity[browserLanguage]); 
+}
 
 const getCityName = async (longitude, latitude) => {
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
@@ -40,18 +48,16 @@ const successCallback = async (position) => {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
 
-  // Get the city or village name
   const locationName = await getCityName( longitude,latitude);
 
   if (locationName != null) {
-      // Update your UI here
-      document.querySelector(".subhead").textContent = (locationName || city) + " - " + currentDate;
+      fillSubHeader(locationName)
   }
 };
 
 const errorCallback = (error) => {
   console.log(error);
-  document.querySelector(".subhead").textContent = (locationName || city) + " - " + currentDate;
+  determineLocation()
 };
 
 navigator.geolocation.getCurrentPosition( successCallback,errorCallback);
@@ -101,13 +107,6 @@ const cityCardComponent = function (
   `;
 };
 
-//----------Loading Spinner Component----------
-const loadingSpinnerComponent = function () {
-  return `
-      <div hidden id="spinner"></div>
-  `;
-};
-
 //----------My Weather API key----------
 const myKey = "dd27ce39ba9342f5a5a124154221605";
 
@@ -149,6 +148,10 @@ const loadEvent = function () {
   //----------EVENT LISTENER FUNCTIONS----------
 
   //----------press enter----------
+ const savedCity = localStorage.getItem('chosenCity');
+
+  savedCity && getData(savedCity) && getImage(savedCity)
+
   function pressEnter(event) {
     if (event.key == "Enter") {
       if ((favButton.innerHTML = `<ion-icon name="heart"></ion-icon>`)) {
@@ -221,7 +224,6 @@ const loadEvent = function () {
     //if the input is invalid
     if (response.status != 200) {
       alert("City not found!");
-      spinner.setAttribute("hidden", "");
     } else {
       const cityWeather = await response.json();
 
