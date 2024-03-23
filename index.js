@@ -1,9 +1,7 @@
 "use strict";
 
 import { languageToCapitalCity } from "./constants.js";
-import { months } from "./constants.js";
-import { days } from "./constants.js";
-import {SYMBOLS} from './constants.js'
+import { months,SYMBOLS,days,countryToLeagueMapping} from "./constants.js";
 import { API_KEY_STOCK,API_KEY_WEATHER } from "./env.js";
 
 const date = new Date();
@@ -288,3 +286,37 @@ async function displayStocks() {
 }
 
 displayStocks(); // Call the function to fetch and display stock data  */
+
+//------------------SPORT-------------------
+
+/* async function fetchLast5SoccerEvents() {
+  const navigatorLanguage = navigator.language.split('-')[0]; // Extract language code
+  
+  const leagueId = countryToLeagueMapping[navigatorLanguage] || countryToLeagueMapping['en']; // Default to 'de' if no match
+  const apiUrl = `https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=${leagueId}`;
+
+  try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      displayEvents(data.events.slice(0, 5)); // Display the last 5 events
+  } catch (error) {
+      console.error("Error fetching events:", error);
+  }
+}
+
+function displayEvents(events) {
+  const eventsContainer = document.getElementById('events');
+  eventsContainer.innerHTML = ''; // Clear previous content
+
+  events.forEach(event => {
+      const eventElement = document.createElement('div');
+      eventElement.innerHTML = `
+          <h2>${event.strEvent}</h2>
+          <p>Date: ${event.dateEvent}</p>
+          <p>Result: ${event.intHomeScore} - ${event.intAwayScore}</p>
+      `;
+      eventsContainer.appendChild(eventElement);
+  });
+}
+
+fetchLast5SoccerEvents(); */

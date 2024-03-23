@@ -68,3 +68,16 @@ export const days = [
   ];
 
  export const SYMBOLS = ['AAPL', 'AMZN', 'MSFT', 'GOOGL', 'TSLA'];
+
+ export const countryToLeagueMapping = {
+  'en': '4328', // Premier League for the United Kingdom
+  'de': '4331', // Bundesliga for Germany
+  'it': '4332', // Serie A for Italy
+  'es': '4335', // La Liga for Spain
+  'fr': '4334', // Ligue 1 for France
+  'nl': '4337', // Eredivisie for Netherlands
+  'pt': '4344', // Primeira Liga for Portugal
+  'br': '4356', // Brasileirao for Brazil
+  'ar': '4351', // Argentine Primera Division for Argentina
+  // Add more mappings as needed
+};
