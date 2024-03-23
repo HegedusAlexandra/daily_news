@@ -5,19 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Sun</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="index.css" />    
   </head>
   <body>
-    <header></header>
+    <header>BLACK SUN TIMES</header>
     <div class="subhead"></div>
     <div class="content">
       <div class="forecast">
         <h2>Weather forecast:</h2>
+        <div class="weather_forecast_container">
+          <div id="city_img"></div>
+          <button id="favButton">heart</button>
+          <input type="text" id="search" placeholder="Enter city here..." />
+          <button id="submit">search</button>
+          <div id="suggestions"></div>
+          <section id="container"></section>       
+        </div>
       </div>
       <div class="news">
         <article class="headline">
-          <h2></h2>
-          <p></p>
+          <h2 id="headline_title">
+            A free press doesn’t mean it’s not a tame press.
+          </h2>
+          <p><span class="headline_sub">by JOHANN WOLFGANG VON GOETHE</span></p>
+          <span id="headline_content"
+            ><img id="headline_img" src="./pictures/journalist.jpg" />
+            Journalists sometimes expose themselves to danger, particularly when
+            reporting in areas of armed conflict or in states that do not
+            respect the freedom of the press. Organizations such as the
+            Committee to Protect Journalists and Reporters Without Borders
+            publish reports on press freedom and advocate for journalistic
+            freedom. As of November 2011, the Committee to Protect Journalists
+            reports that 887 journalists have been killed worldwide since 1992
+            by murder (71%), crossfire or combat (17%), or on dangerous
+            assignment (11%). The "ten deadliest countries" for journalists
+            since 1992 have been Iraq (230 deaths), Philippines (109), Russia
+            (77), Colombia (76), Mexico (69), Algeria (61), Pakistan (59), India
+            (49), Somalia (45), Brazil (31) and Sri Lanka (30).[5] The Committee
+            to Protect Journalists also reports that as of 1 December 2010, 145
+            journalists were jailed worldwide for journalistic activities.
+            Current numbers are even higher. The ten countries with the largest
+            number of currently-imprisoned journalists are Turkey (95),[6] China
+            (34), Iran (34), Eritrea (17), Burma (13), Uzbekistan (6), Vietnam
+            (5), Cuba (4), Ethiopia (4), and Sudan (3).[7] Apart from physical
+            harm, journalists are harmed psychologically. This applies
+            especially to war reporters, but their editorial offices at home
+            often do not know how to deal appropriately with the reporters they
+            expose to danger. Hence, a systematic and sustainable way of
+            psychological support for traumatized journalists is strongly
+            needed. However, only little and fragmented support programs exist
+            so far.[8]
+          </span>
         </article>
         <article class="ncolumn">
           <h2></h2>
@@ -78,6 +116,6 @@
         <div class="scolumn"></div>
       </div>
     </div>
-    <script src="index.js"></script>
+    <script type="module" src="index.js"></script>
   </body>
 </html>
