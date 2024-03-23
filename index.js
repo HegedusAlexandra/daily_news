@@ -20,13 +20,13 @@ let currentDate = `${dayName}, ${month} ${day} ${year}`;
 
 const fillSubHeader = (name) => {
   document.querySelector(".subhead").textContent = name + " - " + currentDate;
-  localStorage.setItem('chosenCity', name);
-} 
+  localStorage.setItem("chosenCity", name);
+};
 
 const determineLocation = () => {
   const browserLanguage = navigator.language;
-  fillSubHeader(languageToCapitalCity[browserLanguage]); 
-}
+  fillSubHeader(languageToCapitalCity[browserLanguage]);
+};
 
 const getCityName = async (longitude, latitude) => {
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
@@ -48,20 +48,19 @@ const successCallback = async (position) => {
   const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
 
-  const locationName = await getCityName( longitude,latitude);
+  const locationName = await getCityName(longitude, latitude);
 
   if (locationName != null) {
-      fillSubHeader(locationName)
+    fillSubHeader(locationName);
   }
 };
 
 const errorCallback = (error) => {
   console.log(error);
-  determineLocation()
+  determineLocation();
 };
 
-navigator.geolocation.getCurrentPosition( successCallback,errorCallback);
-
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 //----------Favorite City Component----------
 
@@ -79,13 +78,6 @@ const listItemComponent = function (name) {
   `;
 };
 
-//----------Card Container Component----------
-const cardContainerComponent = function () {
-  return `
-      <section id="container"></section>
-  `;
-};
-
 //----------Card Component----------
 const cityCardComponent = function (
   date,
@@ -97,12 +89,8 @@ const cityCardComponent = function (
 ) {
   return `
       <div class="city-card">
-          <p>${date}</p>
-          <h5 id="name">${name}</h5>
-          <p id="country">${country}</p>
-          <img src="${icon}">
-          <h6 id="temperature">${temp}</h6>
-          <p id="condition">${condition}</p>
+          <h5 id="name">${name}</h5><p id="country">${country}</p>
+          <div id='weather_condition'><h6 id="temperature">${temp}</h6><img src="${icon}"></div><p id="condition">${condition}</p>
       </div>
   `;
 };
@@ -112,16 +100,12 @@ const myKey = "dd27ce39ba9342f5a5a124154221605";
 
 //----------LOAD EVENT----------
 const loadEvent = function () {
-  //----------VARIABLES FOR ELEMENTS----------
 
   //----------input element----------
   const search = document.getElementById("search");
 
   //----------search button element----------
   const searchButton = document.getElementById("submit");
-
-  //----------fav button element----------
-  const favButton = document.getElementById("favButton");
 
   //----------suggestions element----------
   const suggestionsElement = document.getElementById("suggestions");
@@ -136,9 +120,6 @@ const loadEvent = function () {
   //----------search button event listener----------
   searchButton.addEventListener("click", searchButtonClick);
 
-  //----------fav button event listener----------
-  favButton.addEventListener("click", saveIt);
-
   //----------list item element event listener----------
   suggestionsElement.addEventListener("click", listItemClick);
 
@@ -148,63 +129,34 @@ const loadEvent = function () {
   //----------EVENT LISTENER FUNCTIONS----------
 
   //----------press enter----------
- const savedCity = localStorage.getItem('chosenCity');
+  const savedCity = localStorage.getItem("chosenCity");
 
-  savedCity && getData(savedCity) && getImage(savedCity)
+  savedCity && getData(savedCity) && getImage(savedCity);
 
   function pressEnter(event) {
-    if (event.key == "Enter") {
-      if ((favButton.innerHTML = `<ion-icon name="heart"></ion-icon>`)) {
-        favButton.innerHTML = `<ion-icon name="heart-outline"></ion-icon>`;
-      }
+    if (event.key == "Enter") {      
       getData(search.value);
       getImage(search.value);
-      search.value = "";
       suggestionsElement.innerHTML = "";
     }
   }
 
   //----------auto complete input----------
-  function autoComplete() {
-    if (search.value.length === 0) {
-      Cities(favCities);
-    } else {
-      getCity(search.value);
-    }
+  function autoComplete() {    
+      getCity(search.value);    
   }
 
   //----------click outside the input element----------
-  function showFav(event) {
-    if (!search.contains(event.target)) {
-      suggestionsElement.innerHTML = "";
-    } else {
-      Cities(favCities);
-    }
+  function showFav() {    
+      suggestionsElement.innerHTML = "";    
   }
 
   //----------search button click----------
   function searchButtonClick() {
-    if ((favButton.innerHTML = `<ion-icon name="heart"></ion-icon>`)) {
-      favButton.innerHTML = `<ion-icon name="heart-outline"></ion-icon>`;
-    }
     getData(search.value);
     getImage(search.value);
     search.value = "";
     suggestionsElement.innerHTML = "";
-  }
-
-  //----------favorite button click----------
-  let favCities = [];
-
-  function saveIt() {
-    if ((favButton.innerHTML = `<ion-icon name="heart-outline"></ion-icon>`)) {
-      favCities.push(listOfName);
-      Cities(favCities);
-      favButton.innerHTML = `<ion-icon name="heart"></ion-icon>`;
-      suggestionsElement.innerHTML = "";
-    } else {
-      favButton.innerHTML = `<ion-icon name="heart-outline"></ion-icon>`;
-    }
   }
 
   //----------list item click----------
@@ -339,11 +291,6 @@ const loadEvent = function () {
     suggestionsElement.innerHTML = item;
   }
 
-  //----------insert city names to favorites----------
-  function Cities(favCities) {
-    const item = favCities.map(favCityItemComponent).join(" ");
-    suggestionsElement.innerHTML = item;
-  }
 };
 
 window.addEventListener("load", loadEvent);
