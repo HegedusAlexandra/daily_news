@@ -183,4 +183,29 @@ body .content .news .headline:after {
   width: 64vw;
   height: 0vh;
   display: block;
+}
+body #stocks {
+  width: 18vw;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  border: 3px double #2f2f2f;
+  padding: 10px 15px 10px 15px;
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 20px;
+  box-sizing: border-box;
+  font-family: "Playfair Display", serif;
+}
+body #stocks #stocks_container .stocks_container_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 94%;
+}
+body #stocks #stocks_container p {
+  font-family: "Open Sans", sans-serif;
+  width: 28%;
 }/*# sourceMappingURL=index.css.map */

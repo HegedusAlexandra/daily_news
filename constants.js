@@ -66,3 +66,5 @@ export const days = [
     "Friday",
     "Saturday",
   ];
+
+ export const SYMBOLS = ['AAPL', 'AMZN', 'MSFT', 'GOOGL', 'TSLA'];

@@ -3,6 +3,8 @@
 import { languageToCapitalCity } from "./constants.js";
 import { months } from "./constants.js";
 import { days } from "./constants.js";
+import {SYMBOLS} from './constants.js'
+import { API_KEY_STOCK,API_KEY_WEATHER } from "./env.js";
 
 const date = new Date();
 
@@ -32,7 +34,11 @@ const getCityName = async (longitude, latitude) => {
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,{
+      headers: {
+        'Accept-Language': 'en-US'
+      }
+    });
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -96,39 +102,29 @@ const cityCardComponent = function (
 };
 
 //----------My Weather API key----------
-const myKey = "dd27ce39ba9342f5a5a124154221605";
+const myKey = API_KEY_WEATHER;
 
 //----------LOAD EVENT----------
 const loadEvent = function () {
 
-  //----------input element----------
   const search = document.getElementById("search");
 
-  //----------search button element----------
   const searchButton = document.getElementById("submit");
 
-  //----------suggestions element----------
   const suggestionsElement = document.getElementById("suggestions");
 
-  //----------EVENT LISTENERS----------
-
-  //----------input element event listeners----------
   search.addEventListener("keypress", pressEnter);
 
   search.addEventListener("input", autoComplete);
 
-  //----------search button event listener----------
   searchButton.addEventListener("click", searchButtonClick);
 
-  //----------list item element event listener----------
   suggestionsElement.addEventListener("click", listItemClick);
 
-  //----------document event listener - click outside the input----------
   document.addEventListener("click", showFav);
 
   //----------EVENT LISTENER FUNCTIONS----------
 
-  //----------press enter----------
   const savedCity = localStorage.getItem("chosenCity");
 
   savedCity && getData(savedCity) && getImage(savedCity);
@@ -141,17 +137,14 @@ const loadEvent = function () {
     }
   }
 
-  //----------auto complete input----------
   function autoComplete() {    
       getCity(search.value);    
   }
 
-  //----------click outside the input element----------
   function showFav() {    
       suggestionsElement.innerHTML = "";    
   }
 
-  //----------search button click----------
   function searchButtonClick() {
     getData(search.value);
     getImage(search.value);
@@ -159,7 +152,6 @@ const loadEvent = function () {
     suggestionsElement.innerHTML = "";
   }
 
-  //----------list item click----------
   function listItemClick(event) {
     if (event.target && event.target.nodeName === "OPTION") {
       search.value = event.target.value;
@@ -167,58 +159,27 @@ const loadEvent = function () {
     }
   }
 
-  //----------fetching weather data----------
   async function getData(value) {
     const response = await fetch(`
       http://api.weatherapi.com/v1/current.json?key=${myKey}&q=${value}&aqi=no
       `);
 
-    //if the input is invalid
     if (response.status != 200) {
       alert("City not found!");
     } else {
       const cityWeather = await response.json();
 
-      //weather card container element
       const cardContainerElement = document.getElementById("container");
 
-      //current date
       const getLocalDate = function (localTime) {
         const year = parseInt(localTime.substring(0, 4));
         const month = parseInt(localTime.substring(5, 7));
         const day = parseInt(localTime.substring(8, 10));
         const date = new Date(`${year}, ${month}, ${day}`);
 
-        //array of weekdays
-        const weekDays = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ];
+        const dayOfTheWeek = days[date.getDay()];
 
-        const dayOfTheWeek = weekDays[date.getDay()];
-
-        //array of months
-        const monthOfYear = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ];
-
-        return `${dayOfTheWeek}, ${day} ${monthOfYear[month - 1]} ${year}`;
+        return `${dayOfTheWeek}, ${day} ${months[month - 1]} ${year}`;
       };
 
       const currentDate = getLocalDate(cityWeather.location.localtime);
@@ -232,9 +193,6 @@ const loadEvent = function () {
         `${cityWeather.current.temp_c}°`,
         `${cityWeather.current.condition.text}`
       );
-
-      //----------variable for the favorite button----------
-      listOfName = cityWeather.location.name;
     }
   }
 
@@ -257,35 +215,27 @@ const loadEvent = function () {
     ).style.backgroundImage = `url(${cityImage.photos[0].src.landscape})`;
   }
 
-  //----------fetching autocomplete data----------
   async function getCity(value) {
-    //make request to url
     const response = await fetch(`
       http://api.weatherapi.com/v1/search.json?key=${myKey}&q=${value}
       `);
 
     const cities = await response.json();
 
-    //empty array for the city names
     let results = [];
 
-    //iterate through the array of objects
     for (let i = 0; i < cities.length; i++) {
-      //fill my empty array with the city names
       results.push(cities[i].name);
     }
 
-    //if the input field is empty, we ain't no need no list no more!
     if (`${value}`.length === 0) {
       results = [];
       suggestionsElement.innerHTML = "";
     }
 
-    //call the function which inserts the city names to DOM
     listItemHtml(results);
   }
 
-  //----------insert city names to DOM----------
   function listItemHtml(results) {
     const item = results.map(listItemComponent).join(" ");
     suggestionsElement.innerHTML = item;
@@ -294,3 +244,47 @@ const loadEvent = function () {
 };
 
 window.addEventListener("load", loadEvent);
+
+//--------------STOCK-----------------
+
+
+/*  async function fetchStockData(symbol) {
+  const apiKey =  API_KEY_STOCK; 
+  const url = `https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=${apiKey}`; // Replace YOUR_API_KEY with your actual API key
+
+  try {
+      const response = await fetch(url);
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data[0]; // The API returns an array, we're interested in the first item
+  } catch (error) {
+      console.error(`Fetching stock data for ${symbol} failed:`, error);
+      return null;
+  }
+}
+
+async function displayStocks() {
+  const stocksContainer = document.getElementById('stocks_container');
+  stocksContainer.innerHTML = ''; // Clear existing content
+
+  for (let symbol of SYMBOLS) {
+      const stockData = await fetchStockData(symbol);
+      if (stockData) {
+         const priceChange = stockData.change
+         const arrowIconClass = priceChange >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+         const color = priceChange >= 0 ? 'green' : 'red';
+
+          stocksContainer.innerHTML += `<div class="stocks_container_row">
+              <p><b>${stockData.symbol}</b></p>
+              <p>${parseFloat(stockData.price).toFixed(2)}$</p>
+              <p>${stockData.change}%</p>
+              <span style="color: ${color};"><i class="fas ${arrowIconClass}"></i></span>
+            </div>`;
+      }
+  }
+  stocksContainer.innerHTML += '<a href="https://financialmodelingprep.com/developer/docs/" >Data provided by Financial Modeling Prep</a>'
+}
+
+displayStocks(); // Call the function to fetch and display stock data  */
