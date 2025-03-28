@@ -1,4 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+header {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 80px;
+  text-transform: uppercase;
+  display: inline-block;
+  line-height: 72px;
+  margin-bottom: 20px;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -10,16 +24,6 @@ body {
   color: #2f2f2f;
   background-color: #f9f7f1;
 
-  header {
-    font-family: "Playfair Display", serif;
-    font-weight: 900;
-    font-size: 80px;
-    text-transform: uppercase;
-    display: inline-block;
-    line-height: 72px;
-    margin-bottom: 20px;
-  }
-
   .subhead {
     width: 100%;
     text-transform: uppercase;
@@ -27,192 +31,203 @@ body {
     font-family: "Open Sans", sans-serif;
     border-bottom: 2px solid #2f2f2f;
     border-top: 2px solid #2f2f2f;
-    padding: 12px 0 12px 0;
+    padding: 8px 0 8px 0;
   }
 
   .content {
+    display: flex;
+    flex-direction: row;
     width: 98vw;
     height: 400vh;
+    gap: 1%;
 
-    .forecast {
-      width: 18vw;
-      height: fit-content;
-      position: relative;
-      border: 3px double #2f2f2f;
-      padding: 10px 15px 10px 15px;
-      margin-top: 4vh;
-
-      line-height: 20px;
-      box-sizing: border-box;
-      font-family: "Playfair Display", serif;
+    .column {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-    .news {
+
+    .first_column {
+      width: 20%;
+      height: fit-content;
+      padding-top: 30px;
+      padding-left: 2px;
+      padding-right: 4px;
+      gap: 8px;
+    }
+
+    .second_column {
+      width: 79%;
+      padding-top: 30px;
+      padding-right: 2px;
+      padding-left: 4px;
+    }
+  }
+
+  .forecast {
+    display: flex;
+    align-items: center;
+    justify-items: stretch;
+    flex-direction: column;
+    width: 100%;
+    border: 3px double #2f2f2f;
+    padding: 10px 15px 10px 15px;
+
+    line-height: 20px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .weather_forecast_container {
+    width: 100%;
+    color: #000;
+
+    input {
+      all: unset;
+      border-bottom: 2px solid #a5a5a5bc;
+      height: 4vh;
+      border-radius: 2px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      background-color: rgba(255, 255, 255, 0.4);
+
+      &::placeholder {
+        color: #a5a5a5bc;
+      }
+    }
+
+    #suggestions {
+      position: absolute;
+      min-width: 300px;
+      border-radius: 8px;
+      background-color: #ffffff;
+      line-height: 34px;
+      z-index: 100;
+
+      option {
+        margin: 3px;
+        &:hover {
+          background-color: #dee2e6;
+          cursor: pointer;
+        }
+      }
+    }
+
+    #weather_condition {
+      width: 100%;
       display: flex;
       flex-direction: row;
+      align-items: baseline;
+    }
+
+    #submit {
+      all: unset;
+      padding: 2px;
+      border: 1px solid #a5a5a5bc;
+      box-shadow: 1px 1px 2px #2f2f2f;
+      border-radius: 1px;
+      color: #a5a5a5bc;
+    }
+
+    #submit:hover {
+      color: black;
+      border: 1px solid black;
+    }
+
+    #weather_data {
+      background-color: #f9f7fa61;
       width: 100%;
-      height: max-content;
-      justify-content: space-between;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding-bottom: 4vh;
 
-      .weather_forecast_container {
-        width: 16vw;
-        color: #000;
+      .city-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        text-align: center;
+        font-family: "Playfair Display", serif;
 
-        input {
-          all: unset;
-          border: none;
-          width: 16vw;
-          height: 4vh;
-          border-radius: 2px;
-          box-sizing: border-box;
-          margin-bottom: 10px;
-          margin-top: 10px;
-          background-color: rgba(255, 255, 255, 0.4);
-
-          &::placeholder {
-            color: #000;
-          }
-        }
-
-        #suggestions {
-          position: absolute;
-          min-width: 300px;
-          border-radius: 8px;
-          background-color: #ffffff;
-          line-height: 34px;
-          z-index: 100;
-
-          option {
-            margin: 3px;
-            &:hover {
-              background-color: #dee2e6;
-              cursor: pointer;
-            }
-          }
-        }
-
-        #weather_condition {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items: baseline;
-        }
-
-        #submit {
-          all: unset;
-          padding: 0.5vh;
-          border: 1px solid #2f2f2f;
-          box-shadow: 1px 1px 2px #2f2f2f;
-        }
-
-        #container {
-          .city-card {
-            width: 16vw;
-            height: fit-content;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: start;
-            box-sizing: border-box;
-            text-align: center;
-
-            p {
-              font-size: 18px;
-            }
-
-            h5 {
-              font-size: 28px;
-              font-weight: 500;
-              margin: 0vh;
-              margin-top: 2vh;
-            }
-
-            img {
-              width: 4vh;
-            }
-
-            h6 {
-              font-size: 53px;
-              font-weight: 400;
-              margin: 0vh;
-
-              margin-bottom: 2vh;
-            }
-          }
-        }
-
-        #city_img {
-          width: 16vw;
-          height: 30vh;
-          background-size: cover;
-          box-sizing: border-box;
-          border: 1px solid #2f2f2f;
-        }
-      }
-
-      .headline {
-        width: 78vw;
-        height: 66vh;
-
-        #headline_title {
+        h5 {
           font-family: "Playfair Display", serif;
-          font-style: italic;
-          font-size: xx-large;
+          font-size: 28px;
+          font-weight: 500;
         }
 
-        .headline_sub {
-          font-weight: 700;
-          font-size: large;
-          box-sizing: border-box;
-          padding: 10px 0 10px 0;
-        }
-
-        .headline_sub:before {
-          border-top: 1px solid #2f2f2f;
-          content: "";
-          width: 78vw;
-          height: 7px;
-          display: block;
-        }
-
-        .headline_sub:after {
-          border-bottom: 1px solid #2f2f2f;
-          content: "";
-          width: 78vw;
-          height: 10px;
-          display: block;
-        }
-
-        #headline_content {
-          display: flex;
-          flex-direction: row;
-          font-family: "Open Sans", sans-serif;
-          line-height: 4vh;
-          width: 78vw;
-        }
-        #headline_img {
-          width: 12vw;
-          float: right;
-          margin-left: 2vw;
-          border: 1px solid #2f2f2f;
+        img {
+          width: 80px;
         }
       }
-      .headline:after {
-        border-bottom: 1px solid #2f2f2f;
-        content: "";
-        width: 64vw;
-        height: 0vh;
-        display: block;
-      }
+    }
+  }
+  #city_img {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    border: 1px solid #2f2f2f;
+  }
+  .headline {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 78vw;
+    overflow: hidden;
+    border-bottom: 1px solid #2f2f2f;
+
+    #headline_title {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-size: xx-large;
+    }
+
+    .headline_sub {
+      font-weight: 400;
+      box-sizing: border-box;
+      padding: 8px 0 8px 0;
+    }
+
+    .headline_sub:before {
+      border-top: 1px solid #2f2f2f;
+      content: "";
+      width: 78vw;
+      height: 7px;
+      display: block;
+    }
+
+    .headline_sub:after {
+      border-bottom: 1px solid #2f2f2f;
+      content: "";
+      width: 78vw;
+      height: 10px;
+      display: block;
+    }
+
+    #headline_content {
+      display: flex;
+      flex-direction: row;
+      font-family: "Open Sans", sans-serif;
+      line-height: 4vh;
+      width: 78vw;
+    }
+
+    #headline_img {
+      float: right;
+      margin-left: 2vw;
+      box-shadow: 2px 2px 2px #2f2f2f;
     }
   }
 
   #stocks {
-    width: 18vw;
+    width: 100%;
     height: fit-content;
-    position: relative;
     border: 3px double #2f2f2f;
     padding: 10px 15px 10px 15px;
-    margin-top: 4vh;
     display: flex;
     flex-direction: column;
     line-height: 20px;
@@ -228,8 +243,8 @@ body {
         width: 94%;
       }
       p {
-        font-family: "Open Sans", sans-serif;       
-        width: 28%; 
+        font-family: "Open Sans", sans-serif;
+        width: 28%;
       }
     }
   }

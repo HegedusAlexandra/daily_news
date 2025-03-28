@@ -11,15 +11,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
   </head>
+  <header>BLACK SUN TIMES</header>
   <body>
-    <header>BLACK SUN TIMES</header>
     <div class="subhead"></div>
     <div class="content">
-      <div class="news">
+      <div class="first_column column">
         <div class="forecast">
-          <h2>Weather forecast:</h2>
+          <h2>Weather forecast</h2>
           <div class="weather_forecast_container">
-            <div id="city_img"></div>
+            <div id="city_img"><div id="weather_data"></div></div>
             <div id="weather_condition">
               <input
                 type="text"
@@ -30,9 +30,57 @@
               <button id="submit">search</button>
             </div>
             <div id="suggestions"></div>
-            <section id="container"></section>
           </div>
         </div>
+        <div class="market">
+          <div id="stocks">
+            <h2>Popular Stocks:</h2>
+            <div id="stocks_container">
+              <div class="stocks_container_row">
+                <p><b>APPL</b></p>
+                <p>10000$</p>
+                <p>112%</p>
+                <span style="color: green"
+                  ><i class="fas fa-arrow-up"></i
+                ></span>
+              </div>
+              <div class="stocks_container_row">
+                <p><b>AMZ</b></p>
+                <p>10000$</p>
+                <p>112%</p>
+                <span style="color: green"
+                  ><i class="fas fa-arrow-up"></i
+                ></span>
+              </div>
+              <div class="stocks_container_row">
+                <p><b>TSLA</b></p>
+                <p>10000$</p>
+                <p>112%</p>
+                <span style="color: green"
+                  ><i class="fas fa-arrow-up"></i
+                ></span>
+              </div>
+              <div class="stocks_container_row">
+                <p><b>GOOGL</b></p>
+                <p>10000$</p>
+                <p>112%</p>
+                <span style="color: green"
+                  ><i class="fas fa-arrow-up"></i
+                ></span>
+              </div>
+              <div class="stocks_container_row">
+                <p><b>MSFT</b></p>
+                <p>10000$</p>
+                <p>112%</p>
+                <span style="color: green"
+                  ><i class="fas fa-arrow-up"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="second_column column">
         <article class="headline">
           <h2 id="headline_title">
             A free press doesn’t mean it’s not a tame press.
@@ -43,7 +91,7 @@
             >
           </p>
           <span id="headline_content">
-            <p>
+            <p id="headline_text">
               Freedom of the press or freedom of the media is the fundamental
               principle that communication and expression through various media,
               including printed and electronic media, especially published
@@ -65,50 +113,17 @@
               regards Egypt as "the world's third-worst jailer of journalists",
               behind Turkey and China.
             </p>
-            <img id="headline_img" src="./pictures/journalist.jpg" />
+            <img
+              id="headline_img"
+              alt="typewriter"
+              src="./pictures/journalist_2.gif"
+            />
           </span>
         </article>
-      </div>
-      <div class="market">
-        <div id="stocks">
-          <h2>Popular Stocks:</h2>
-          <div id="stocks_container">
-            <div class="stocks_container_row">
-              <p><b>APPL</b></p>
-              <p>10000$</p>
-              <p>112%</p>
-              <span style="color: green"><i class="fas fa-arrow-up"></i></span>
-            </div>
-            <div class="stocks_container_row">
-              <p><b>AMZ</b></p>
-              <p>10000$</p>
-              <p>112%</p>
-              <span style="color: green"><i class="fas fa-arrow-up"></i></span>
-            </div>
-            <div class="stocks_container_row">
-              <p><b>TSLA</b></p>
-              <p>10000$</p>
-              <p>112%</p>
-              <span style="color: green"><i class="fas fa-arrow-up"></i></span>
-            </div>
-            <div class="stocks_container_row">
-              <p><b>GOOGL</b></p>
-              <p>10000$</p>
-              <p>112%</p>
-              <span style="color: green"><i class="fas fa-arrow-up"></i></span>
-            </div>
-            <div class="stocks_container_row">
-              <p><b>MSFT</b></p>
-              <p>10000$</p>
-              <p>112%</p>
-              <span style="color: green"><i class="fas fa-arrow-up"></i></span>
-            </div>
-          </div>
+        <div class="sport">
+          <h1>Last 5 Soccer Events Based on Your Browser Language</h1>
+          <div id="events"></div>
         </div>
-      </div>
-      <div class="sport">
-        <h1>Last 5 Soccer Events Based on Your Browser Language</h1>
-        <div id="events"></div>
       </div>
     </div>
     <script type="module" src="index.js"></script>

@@ -1,11 +1,23 @@
 "use strict";
 
 import { languageToCapitalCity } from "./constants.js";
-import { months,SYMBOLS,days,countryToLeagueMapping} from "./constants.js";
-import { API_KEY_STOCK,API_KEY_WEATHER } from "./env.js";
+import { months, SYMBOLS, days, countryToLeagueMapping } from "./constants.js";
+import { API_KEY_STOCK, API_KEY_WEATHER } from "./env.js";
 
 const date = new Date();
 
+//------------headline article height
+
+const firstColumn = document.getElementsByClassName("first_column column")[0];
+const headlineArticle = document.getElementsByClassName("headline")[0];
+const headlineText = document.getElementById("headline_text");
+const headlineImg = document.getElementById("headline_img");
+
+if (firstColumn && headlineArticle && headlineText && headlineImg) {
+  const columnHeight = firstColumn.getBoundingClientRect();
+  const headlineArticleHeight = Math.floor(columnHeight.height) - 30 + "px";
+  headlineArticle.style.height = headlineArticleHeight;
+}
 //------------HEADER COMPONENT----------
 
 // date
@@ -32,9 +44,9 @@ const getCityName = async (longitude, latitude) => {
   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
 
   try {
-    const response = await fetch(url,{
+    const response = await fetch(url, {
       headers: {
-        'Accept-Language': 'en-US'
+        "Accept-Language": "en-US"
       }
     });
     if (!response.ok) {
@@ -56,6 +68,8 @@ const successCallback = async (position) => {
 
   if (locationName != null) {
     fillSubHeader(locationName);
+    getCity(locationName);
+    getData(locationName);
   }
 };
 
@@ -93,8 +107,11 @@ const cityCardComponent = function (
 ) {
   return `
       <div class="city-card">
-          <h5 id="name">${name}</h5><p id="country">${country}</p>
-          <div id='weather_condition'><h6 id="temperature">${temp}</h6><img src="${icon}"></div><p id="condition">${condition}</p>
+        <h5 id="name">${name}</h5>
+        <span id="country">${country}</span>          
+        <span id="temperature">${temp}</span>
+        <img src="${icon}">          
+        <span id="condition">${condition}</span>
       </div>
   `;
 };
@@ -104,7 +121,6 @@ const myKey = API_KEY_WEATHER;
 
 //----------LOAD EVENT----------
 const loadEvent = function () {
-
   const search = document.getElementById("search");
 
   const searchButton = document.getElementById("submit");
@@ -128,19 +144,19 @@ const loadEvent = function () {
   savedCity && getData(savedCity) && getImage(savedCity);
 
   function pressEnter(event) {
-    if (event.key == "Enter") {      
+    if (event.key == "Enter") {
       getData(search.value);
       getImage(search.value);
       suggestionsElement.innerHTML = "";
     }
   }
 
-  function autoComplete() {    
-      getCity(search.value);    
+  function autoComplete() {
+    getCity(search.value);
   }
 
-  function showFav() {    
-      suggestionsElement.innerHTML = "";    
+  function showFav() {
+    suggestionsElement.innerHTML = "";
   }
 
   function searchButtonClick() {
@@ -163,11 +179,13 @@ const loadEvent = function () {
       `);
 
     if (response.status != 200) {
-      alert("City not found!");
+      alert("City not found!" + response.status);
     } else {
       const cityWeather = await response.json();
-
-      const cardContainerElement = document.getElementById("container");
+      console.log("====================================");
+      console.log(cityWeather);
+      console.log("====================================");
+      const cardContainerElement = document.getElementById("weather_data");
 
       const getLocalDate = function (localTime) {
         const year = parseInt(localTime.substring(0, 4));
@@ -238,13 +256,11 @@ const loadEvent = function () {
     const item = results.map(listItemComponent).join(" ");
     suggestionsElement.innerHTML = item;
   }
-
 };
 
 window.addEventListener("load", loadEvent);
 
 //--------------STOCK-----------------
-
 
 /*  async function fetchStockData(symbol) {
   const apiKey =  API_KEY_STOCK; 
